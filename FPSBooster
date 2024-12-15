@@ -14,15 +14,6 @@ local PhantomForcesWindow = Library:NewWindow("FPS BloxFruit")
 local KillingCheats = PhantomForcesWindow:NewSection("Options")
 
 KillingCheats:CreateButton("Boost FPS", function()
-local NotificationService = game:GetService("StarterGui")
-
--- Create the notification
-NotificationService:SetCore("SendNotification", {
-    Title = "Execution Successful",  -- Title of the notification
-    Text = "FPS Booster LOADED!",  -- Message in the notification
-    Duration = 5  -- Duration in seconds
-})
-
 local function disableShadows()
     game:GetService("Lighting").GlobalShadows = false
 end
@@ -67,14 +58,6 @@ print("FPS Booster Enabled!")
 end)
 
 KillingCheats:CreateButton("Unlock FPS", function()
-local NotificationService = game:GetService("StarterGui")
-
--- Create the notification
-NotificationService:SetCore("SendNotification", {
-    Title = "Execution Successful",  -- Title of the notification
-    Text = "FPS UNLOCKER Loaded!",  -- Message in the notification
-    Duration = 5  -- Duration in seconds
-
 local fpsGui = Instance.new("ScreenGui")
 fpsGui.IgnoreGuiInset = true
 fpsGui.ResetOnSpawn = false
