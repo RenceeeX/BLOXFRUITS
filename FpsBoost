@@ -1,0 +1,90 @@
+local NotificationService = game:GetService("StarterGui")
+
+-- Create the notification
+NotificationService:SetCore("SendNotification", {
+    Title = "Execution Successful",  -- Title of the notification
+    Text = "Made By Jun",  -- Message in the notification
+    Duration = 5  -- Duration in seconds
+})
+
+local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
+
+local PhantomForcesWindow = Library:NewWindow("FPS BloxFruit")
+
+local KillingCheats = PhantomForcesWindow:NewSection("Options")
+
+KillingCheats:CreateButton("Boost FPS", function()
+local function disableShadows()
+    game:GetService("Lighting").GlobalShadows = false
+end
+
+local function disableParticles()
+    for _, particle in pairs(workspace:GetDescendants()) do
+        if particle:IsA("ParticleEmitter") then
+            particle.Enabled = false
+        end
+    end
+end
+
+local function setGraphicsQuality()
+    game:GetService("UserSettings").GameSettings.SavedQualityLevel = Enum.QualityLevel.Level01
+end
+
+local function disablePostProcessing()
+    game:GetService("Lighting").PostEffect = Enum.PostEffect.Disabled
+end
+
+local function setTextureQuality()
+    game:GetService("UserSettings").GameSettings.TextureQuality = Enum.TextureQuality.Fast
+end
+
+local function reducePhysics()
+    game:GetService("PhysicsService").MaxPhysicsSteps = 10
+end
+
+local function disableFog()
+    game:GetService("Lighting").FogEnabled = false
+end
+
+disableShadows()
+disableParticles()
+setGraphicsQuality()
+disablePostProcessing()
+setTextureQuality()
+reducePhysics()
+disableFog()
+
+print("FPS Booster Enabled!")
+end)
+
+KillingCheats:CreateButton("Unlock FPS", function()
+local fpsGui = Instance.new("ScreenGui")
+fpsGui.IgnoreGuiInset = true
+fpsGui.ResetOnSpawn = false
+fpsGui.Parent = game.CoreGui
+
+local fpsLabel = Instance.new("TextLabel")
+fpsLabel.Size = UDim2.new(0, 100, 0, 50)
+fpsLabel.Position = UDim2.new(0, 10, 0, 80) -- Moved further down
+fpsLabel.BackgroundTransparency = 0.5 -- Fully opaque
+fpsLabel.BackgroundColor3 = Color3.new(0, 0, 0) -- Black background
+fpsLabel.TextColor3 = Color3.new(1, 1, 1) -- White text
+fpsLabel.Font = Enum.Font.SourceSansBold
+fpsLabel.TextSize = 24
+fpsLabel.Text = "FPS: 0"
+fpsLabel.Parent = fpsGui
+
+local lastTime = tick()
+local frameCount = 0
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    frameCount = frameCount + 1
+    local currentTime = tick()
+    if currentTime - lastTime >= 1 then
+        local fps = frameCount / (currentTime - lastTime)
+        fpsLabel.Text = "FPS: " .. math.floor(fps)
+        lastTime = currentTime
+        frameCount = 0
+    end
+end)
+end)
